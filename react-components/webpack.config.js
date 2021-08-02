@@ -3,10 +3,44 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const WebpackPrettierPlugin = require('webpack-prettier-plugin');
 
-module.exports = {
+const devServer = (isDev) =>
+  !isDev
+    ? {}
+    : {
+        devServer: {
+          open: true,
+          hot: true,
+          port: 8080,
+          contentBase: path.join(__dirname, 'public'),
+        },
+      };
+
+const esLintPlugin = (isDev) =>
+  isDev ? [] : [new ESLintPlugin({ extensions: ['ts', 'js', 'tsx', 'jsx'] })];
+
+const prettierPlugin = (isDev) =>
+  isDev
+    ? [
+        new WebpackPrettierPlugin({
+          extensions: ['.js', '.ts', '.tsx', '.jsx'],
+          printWidth: 80,
+          tabWidth: 2,
+          useTabs: false,
+          semi: true,
+          singleQuote: true,
+          encoding: 'utf-8',
+        }),
+      ]
+    : [];
+
+module.exports = ({ develop }) => ({
+  mode: develop ? 'development' : 'production',
+  devtool: develop ? 'inline-source-map' : 'source-map',
   entry: {
-    main: './src/index.tsx'
+    main: './src/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -30,23 +64,23 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.s[ac]ss/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css'
+      filename: '[name].[contenthash].css',
     }),
     // new CopyPlugin({
     //   patterns: [
@@ -54,7 +88,10 @@ module.exports = {
     //   ],
     // }),
     new CleanWebpackPlugin({
-      cleanStaleWebpackAssets: false
+      cleanStaleWebpackAssets: false,
     }),
-  ]
-}
+    ...esLintPlugin(develop),
+    ...prettierPlugin(develop),
+  ],
+  ...devServer(develop),
+});

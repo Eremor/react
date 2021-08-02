@@ -1,11 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
+import './app.scss';
 
-const App:React.FC = ():ReactElement => {
+export default function App(): JSX.Element {
   return (
     <div>
-      <h1>React.Components</h1>
+      <h1>Hello world</h1>
     </div>
-  )
+  );
 }
-
-export default App;
