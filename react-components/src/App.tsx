@@ -1,10 +1,13 @@
 import React from 'react';
+import { SearchBar } from './components/search-bar/SearchBar';
 import './app.scss';
 
-export default function App(): JSX.Element {
+const App = (): JSX.Element => {
   return (
-    <div>
-      <h1>Hello world</h1>
+    <div className="app">
+      <SearchBar />
     </div>
   );
-}
+};
+
+export default App;

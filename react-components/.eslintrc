@@ -37,7 +37,8 @@
       {
         "props": false
       }
-    ]
+    ],
+    "arrow-body-style": 0
   },
   "settings": {
     "react": {

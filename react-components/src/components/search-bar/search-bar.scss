@@ -1,0 +1,43 @@
+.search-bar {
+  position: relative;
+  display: flex;
+  margin-top: 40px;
+  margin-bottom: 60px;
+
+  &__body {
+    padding: 10px 30px;
+    padding-left: 50px;
+    width: 500px;
+    height: 60px;
+    border: 2px solid #a31a98;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+    color: #a31a98;
+
+    &:active,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("./../../assets/icons/search.svg");
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
