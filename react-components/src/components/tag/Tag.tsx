@@ -5,5 +5,7 @@ type ITag = {
 };
 
 export const Tag = (props: ITag): JSX.Element => {
-  return <li className="card__tag">{props.tag}</li>;
+  const { tag } = props;
+
+  return <li className="card__tag">{tag}</li>;
 };

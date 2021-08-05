@@ -20,7 +20,7 @@ export const CardContainer = (): JSX.Element => {
     <div className="cards-container">
       {cards.map((card: ICard, i: number) => (
         <Card
-          key={i}
+          key={i.toString()}
           image={card.image}
           title={card.title}
           author={card.author}
