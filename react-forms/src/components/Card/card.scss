@@ -1,0 +1,85 @@
+.card {
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px solid #a31a98;
+  border-radius: 6px;
+
+  &__name {
+    margin-bottom: 7px;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+
+    & strong {
+      margin-right: 7px;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: #a31a98;
+      text-transform: uppercase;
+    }
+  }
+
+  &__surname {
+    margin-bottom: 7px;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+
+    & strong {
+      margin-right: 7px;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: #a31a98;
+      text-transform: uppercase;
+    }
+  }
+
+  &__birthday {
+    margin-bottom: 7px;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+
+    & strong {
+      margin-right: 7px;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: #a31a98;
+      text-transform: uppercase;
+    }
+  }
+
+  &__nationality {
+    margin-bottom: 7px;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+
+    & strong {
+      margin-right: 7px;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: #a31a98;
+      text-transform: uppercase;
+    }
+  }
+
+  &__gender {
+    margin-bottom: 7px;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 400;
+
+    & strong {
+      margin-right: 7px;
+      font-size: 1.4rem;
+      line-height: 1.6rem;
+      color: #a31a98;
+      text-transform: uppercase;
+    }
+  }
+}
