@@ -40,7 +40,7 @@ module.exports = ({ develop }) => ({
   mode: develop ? 'development' : 'production',
   devtool: develop ? 'inline-source-map' : 'source-map',
   entry: {
-    main: './src/index.ts',
+    main: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
