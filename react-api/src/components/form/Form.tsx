@@ -1,11 +1,23 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, ErrorInfo, useState } from 'react';
+import { IArticle } from '../../interfaces/iarticle';
+import { api } from '../../services/api';
 import './form.scss';
 
 type FormValueType = {
   setFormValue: (searchValue: string) => void;
+  setArticles: (articles: IArticle[]) => void;
 };
 
-export const Form = ({ setFormValue }: FormValueType): JSX.Element => {
+type RequestData = {
+  articles: IArticle[];
+  status: string;
+  totalResult: number;
+};
+
+export const Form = ({
+  setFormValue,
+  setArticles,
+}: FormValueType): JSX.Element => {
   const [searchValue, setSearchValue] = useState<string>('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -13,10 +25,21 @@ export const Form = ({ setFormValue }: FormValueType): JSX.Element => {
     setSearchValue(value);
   };
 
+  const getArticles = async () => {
+    try {
+      const response: RequestData = await api.getNews(searchValue, 1);
+      console.log(response);
+      setArticles(response.articles);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (searchValue !== '') {
       setFormValue(searchValue);
+      getArticles();
     }
     resetSearch();
   };
