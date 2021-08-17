@@ -1,3 +1,5 @@
+import { IRequestData } from '../interfaces/types';
+
 class API {
   private baseURL = 'https://newsapi.org/v2';
 
@@ -5,14 +7,16 @@ class API {
 
   public getNews = async (
     query: string,
+    sort = 'publishedAt',
     page: number,
-    limit = 10
-  ): Promise<any> => {
+    limit = 9
+  ): Promise<IRequestData> => {
     const response = await fetch(
-      `${this.baseURL}/everything?q=${query}&apiKey=${this.apiKey}&pageSize=${limit}&page=${page}`
+      `${this.baseURL}/everything?q=${query}&apiKey=${this.apiKey}
+      &pageSize=${limit}&page=${page}&sortBy=${sort}`
     );
 
-    return await response.json();
+    return response.json();
   };
 }
 

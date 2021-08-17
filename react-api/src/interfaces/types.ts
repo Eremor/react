@@ -7,3 +7,9 @@ export interface IArticle {
   title: string;
   urlToImage: string;
 }
+
+export type IRequestData = {
+  articles: IArticle[];
+  status: string;
+  totalResult: number;
+};
