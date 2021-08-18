@@ -11,5 +11,14 @@ export interface IArticle {
 export type IRequestData = {
   articles: IArticle[];
   status: string;
-  totalResult: number;
+  totalResults: number;
+};
+
+export type IPage = {
+  pageNumber: number;
+  pageLimit: number;
+};
+
+export type IPageValue = {
+  pageValue: IPage;
 };
