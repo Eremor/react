@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IArticle, IPageValue, IRequestData } from '../../interfaces/types';
+import { IArticle, IRequestData } from '../../interfaces/types';
 import { api } from '../../services/api';
 import { Article } from '../article/Article';
 import { Filters } from '../filters/Filters';
@@ -8,15 +8,19 @@ import { Pagination } from '../pagination/Pagination';
 import './dashboard.scss';
 
 export const Dashboard = (): JSX.Element => {
+  const MAX_PAGE_SIZE = 100;
   const [queryValue, setQueryValue] = useState<string>('');
   const [articles, setArticles] = useState<IArticle[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
   const [pageLimit, setPageLimit] = useState<number>(9);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getArticles = async () => {
     try {
+      setIsLoading(true);
+
       const response: IRequestData = await api.getNews(
         queryValue,
         sortBy,
@@ -24,11 +28,12 @@ export const Dashboard = (): JSX.Element => {
         pageLimit
       );
       setArticles(response.articles);
-      console.log(response.totalResults, lastPage);
-      const lastPageCount = Math.ceil(response.totalResults / pageLimit);
+      const lastPageCount = Math.floor(MAX_PAGE_SIZE / pageLimit);
       setLastPage(lastPageCount);
     } catch (error) {
-      new Error(error);
+      throw new Error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,6 +60,7 @@ export const Dashboard = (): JSX.Element => {
           <Article article={art} key={index.toString()} />
         ))}
       </div>
+      {isLoading && <div className="dashboard__loading">Loading...</div>}
     </div>
   );
 };

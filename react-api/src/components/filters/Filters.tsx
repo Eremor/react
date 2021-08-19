@@ -14,6 +14,7 @@ export const Filters = ({ setSortBy }: SortType): JSX.Element => {
   return (
     <div className="filter">
       <button
+        type="button"
         className="filter__item"
         data-sort="popularity"
         onClick={handleClick}
@@ -21,6 +22,7 @@ export const Filters = ({ setSortBy }: SortType): JSX.Element => {
         Popularity
       </button>
       <button
+        type="button"
         className="filter__item"
         data-sort="relevancy"
         onClick={handleClick}
@@ -28,6 +30,7 @@ export const Filters = ({ setSortBy }: SortType): JSX.Element => {
         Relevancy
       </button>
       <button
+        type="button"
         className="filter__item"
         data-sort="publishedAt"
         onClick={handleClick}

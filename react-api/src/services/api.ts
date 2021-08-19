@@ -9,7 +9,7 @@ class API {
     query: string,
     sort = 'publishedAt',
     page: number,
-    limit = 9
+    limit = 30
   ): Promise<IRequestData> => {
     const response = await fetch(
       `${this.baseURL}/everything?q=${query}&apiKey=${this.apiKey}

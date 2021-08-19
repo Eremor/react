@@ -1,20 +1,21 @@
 import React, { ChangeEvent, useState } from 'react';
 import './pagination.scss';
 
+type PaginationType = {
+  setPageLimit: (limit: number) => void;
+  setPageNumber: (pageNumber: number) => void;
+  pageNumber: number;
+  lastPage: number;
+};
+
 export const Pagination = ({
   setPageLimit,
   setPageNumber,
   pageNumber,
   lastPage,
-}: any): JSX.Element => {
+}: PaginationType): JSX.Element => {
   const [pageCount, setPageCount] = useState<string>('');
   const [error, setError] = useState<string>('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    validate();
-    setPageCount('');
-  };
 
   const validate = () => {
     const regexp = /\d+/;
@@ -35,6 +36,12 @@ export const Pagination = ({
     }
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    validate();
+    setPageCount('');
+  };
+
   return (
     <div className="pagination">
       <form className="pagination__wrapper" onSubmit={handleSubmit}>
@@ -49,7 +56,9 @@ export const Pagination = ({
             }}
           />
           {error === 'error' && (
-            <span className="error">{`* select page from 1 to ${lastPage}`}</span>
+            <span className="error">
+              {`* select page from 1 to ${lastPage}`}
+            </span>
           )}
         </label>
         <p className="pagination__text">
@@ -58,19 +67,20 @@ export const Pagination = ({
             className="pagination__limit"
             name="pageLimit"
             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-              setPageLimit(e.target.value);
+              setPageLimit(+e.target.value);
               setPageNumber(1);
             }}
           >
-            <option value="9">9</option>
-            <option value="18">18</option>
-            <option value="27">27</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
           </select>
         </p>
         <p className="pagination__text">{`Last page: ${lastPage}`}</p>
       </form>
       <div className="pagination__wrapper">
         <button
+          type="button"
           className="pagination__button"
           onClick={() => setPageNumber(1)}
           disabled={pageNumber === 1}
@@ -78,6 +88,7 @@ export const Pagination = ({
           &laquo;
         </button>
         <button
+          type="button"
           className="pagination__button"
           onClick={() => setPageNumber(pageNumber - 1)}
           disabled={pageNumber === 1}
@@ -86,6 +97,7 @@ export const Pagination = ({
         </button>
         <p className="pagination__number">{pageNumber}</p>
         <button
+          type="button"
           className="pagination__button"
           onClick={() => setPageNumber(pageNumber + 1)}
           disabled={pageNumber === lastPage}
@@ -93,6 +105,7 @@ export const Pagination = ({
           &gt;
         </button>
         <button
+          type="button"
           className="pagination__button"
           onClick={() => setPageNumber(lastPage)}
           disabled={pageNumber === lastPage}
@@ -101,7 +114,7 @@ export const Pagination = ({
         </button>
       </div>
       <p className="error__message">
-        Free version is limited to 11 pages. Please don't go beyond
+        Free version is limited to 11 pages. Please don&apos;t go beyond
       </p>
     </div>
   );
