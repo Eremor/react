@@ -44,7 +44,7 @@ export const Dashboard = (): JSX.Element => {
   }, [sortBy, queryValue, pageNumber, pageLimit]);
 
   return (
-    <div className="dashboard">
+    <section className="dashboard">
       <Form setFormValue={setQueryValue} />
       <div className="dashboard__nav">
         <Filters setSortBy={setSortBy} />
@@ -61,6 +61,6 @@ export const Dashboard = (): JSX.Element => {
         ))}
       </div>
       {isLoading && <div className="dashboard__loading">Loading...</div>}
-    </div>
+    </section>
   );
 };
