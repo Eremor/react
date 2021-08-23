@@ -1,5 +1,5 @@
 import React from 'react';
-import './pages.scss';
+import './../pages.scss';
 
 export const About = (): JSX.Element => {
   return (
