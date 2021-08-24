@@ -26,6 +26,7 @@
     line-height: 2rem;
     color: #3498db;
     cursor: pointer;
+    text-decoration: none;
   }
 
   &__wrapper {
@@ -38,6 +39,8 @@
     font-size: 1.2rem;
     line-height: 1.4rem;
     font-weight: bold;
+    color: #1b1b1b;
+    text-decoration: none;
   }
 
   &__published {
@@ -45,11 +48,14 @@
     line-height: 1.2rem;
     font-weight: 400;
     color: #3498db;
+    text-decoration: none;
   }
 
   &__description {
+    margin-bottom: 10px;
     font-size: 1rem;
     line-height: 1.5rem;
-    margin-bottom: 10px;
+    color: #1b1b1b;
+    text-decoration: none;
   }
 }

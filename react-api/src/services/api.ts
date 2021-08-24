@@ -18,6 +18,14 @@ class API {
 
     return response.json();
   };
+
+  public getDetailsNews = async (qInTitle: string): Promise<IRequestData> => {
+    const response = await fetch(
+      `${this.baseURL}/everything?qInTitle=${qInTitle}&apiKey=${this.apiKey}`
+    );
+
+    return response.json();
+  };
 }
 
 export const api = new API();
