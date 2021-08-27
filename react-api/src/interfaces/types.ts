@@ -22,3 +22,6 @@ export type IPage = {
 export type IPageValue = {
   pageValue: IPage;
 };
+
+export const BASE_URL = 'https://newsapi.org/v2';
+export const API_KEY = '89b111fd925245659432b60fe96e76e4';

@@ -1,45 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { IArticle, IRequestData } from '../../interfaces/types';
-import { api } from '../../services/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNews } from '../../redux/actions/newsActions';
+import { rootReducer } from '../../redux/reducers/rootReducer';
 import { Article } from '../article/Article';
 import { Filters } from '../filters/Filters';
 import { Form } from '../form/Form';
 import { Pagination } from '../pagination/Pagination';
 import './dashboard.scss';
 
+type RootState = ReturnType<typeof rootReducer>;
+
 export const Dashboard = (): JSX.Element => {
+  const news = useSelector((state: RootState) => state.news);
+  const dispatch = useDispatch();
+
   const MAX_PAGE_SIZE = 100;
+
   const [queryValue, setQueryValue] = useState<string>('');
-  const [articles, setArticles] = useState<IArticle[]>([]);
   const [sortBy, setSortBy] = useState<string>('');
   const [pageLimit, setPageLimit] = useState<number>(9);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [lastPage, setLastPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const getArticles = async () => {
-    try {
-      setIsLoading(true);
-
-      const response: IRequestData = await api.getNews(
-        queryValue,
-        sortBy,
-        pageNumber,
-        pageLimit
-      );
-      setArticles(response.articles);
-      const lastPageCount = Math.floor(MAX_PAGE_SIZE / pageLimit);
-      setLastPage(lastPageCount);
-    } catch (error) {
-      throw new Error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   useEffect(() => {
     if (queryValue !== '') {
-      getArticles();
+      try {
+        dispatch(
+          getNews({
+            query: queryValue,
+            sort: sortBy,
+            page: pageNumber,
+            limit: pageLimit,
+          })
+        );
+        const lastPageCount = Math.floor(MAX_PAGE_SIZE / pageLimit);
+        setLastPage(lastPageCount);
+      } catch (e) {
+        console.log(e);
+      }
     }
   }, [sortBy, queryValue, pageNumber, pageLimit]);
 
@@ -56,11 +54,11 @@ export const Dashboard = (): JSX.Element => {
         />
       </div>
       <div className="dashboard__content">
-        {articles.map((art, index) => (
+        {news.articles.map((art, index) => (
           <Article article={art} key={index.toString()} />
         ))}
       </div>
-      {isLoading && <div className="dashboard__loading">Loading...</div>}
+      {news.loading && <div className="dashboard__loading">Loading...</div>}
     </section>
   );
 };
