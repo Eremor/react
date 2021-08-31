@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #3498db;
+}
+
+.nav {
+  margin: 10px 0;
+  display: flex;
+
+  &__link {
+    margin: 0 10px;
+    font-size: 2rem;
+
+    & a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    & .nav__link--active {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        left: -2px;
+        bottom: -2px;
+        content: "";
+        display: flex;
+        width: 112%;
+        height: 2px;
+        background-color: #ffffff;
+      }
+    }
+  }
+}

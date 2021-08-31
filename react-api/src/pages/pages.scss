@@ -1,0 +1,22 @@
+.about {
+  margin-top: 40px;
+  width: 60%;
+
+  &__text {
+    font-size: 1.8rem;
+    line-height: 3rem;
+  }
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+
+  &__text {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
