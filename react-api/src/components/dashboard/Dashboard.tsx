@@ -1,57 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../interfaces/types';
 import { getNews } from '../../redux/actions/newsActions';
-import { rootReducer } from '../../redux/reducers/rootReducer';
 import { Article } from '../article/Article';
 import { Filters } from '../filters/Filters';
 import { Form } from '../form/Form';
 import { Pagination } from '../pagination/Pagination';
 import './dashboard.scss';
 
-type RootState = ReturnType<typeof rootReducer>;
-
 export const Dashboard = (): JSX.Element => {
-  const news = useSelector((state: RootState) => state.news);
+  const { news, requestValue } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
-  const MAX_PAGE_SIZE = 100;
-
-  const [queryValue, setQueryValue] = useState<string>('');
-  const [sortBy, setSortBy] = useState<string>('');
-  const [pageLimit, setPageLimit] = useState<number>(9);
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [lastPage, setLastPage] = useState<number>(1);
+  const { query, sort, page, limit } = requestValue;
 
   useEffect(() => {
-    if (queryValue !== '') {
+    if (query !== '') {
       try {
-        dispatch(
-          getNews({
-            query: queryValue,
-            sort: sortBy,
-            page: pageNumber,
-            limit: pageLimit,
-          })
-        );
-        const lastPageCount = Math.floor(MAX_PAGE_SIZE / pageLimit);
-        setLastPage(lastPageCount);
+        dispatch(getNews({ query, sort, page, limit }));
       } catch (e) {
         console.log(e);
       }
     }
-  }, [sortBy, queryValue, pageNumber, pageLimit]);
+  }, [sort, query, page, limit]);
 
   return (
     <section className="dashboard">
-      <Form setFormValue={setQueryValue} />
+      <Form />
       <div className="dashboard__nav">
-        <Filters setSortBy={setSortBy} />
-        <Pagination
-          setPageLimit={setPageLimit}
-          lastPage={lastPage}
-          pageNumber={pageNumber}
-          setPageNumber={setPageNumber}
-        />
+        <Filters />
+        <Pagination />
       </div>
       <div className="dashboard__content">
         {news.articles.map((art, index) => (

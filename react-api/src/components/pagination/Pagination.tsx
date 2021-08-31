@@ -1,21 +1,19 @@
 import React, { ChangeEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MAX_PAGE_SIZE, RootState } from '../../interfaces/types';
+import { setLimit, setPage } from '../../redux/actions/requestValueAction';
 import './pagination.scss';
 
-type PaginationType = {
-  setPageLimit: (limit: number) => void;
-  setPageNumber: (pageNumber: number) => void;
-  pageNumber: number;
-  lastPage: number;
-};
+export const Pagination = (): JSX.Element => {
+  const requestValue = useSelector((state: RootState) => state.requestValue);
+  const dispatch = useDispatch();
 
-export const Pagination = ({
-  setPageLimit,
-  setPageNumber,
-  pageNumber,
-  lastPage,
-}: PaginationType): JSX.Element => {
+  const { page, limit } = requestValue;
+
   const [pageCount, setPageCount] = useState<string>('');
   const [error, setError] = useState<string>('');
+
+  const lastPage = Math.floor(MAX_PAGE_SIZE / limit);
 
   const validate = () => {
     const regexp = /\d+/;
@@ -25,7 +23,7 @@ export const Pagination = ({
       const newValue = +matchedPageCount[0];
 
       if (newValue > 0 && newValue <= lastPage) {
-        setPageNumber(newValue);
+        dispatch(setPage(newValue));
         setError('');
       } else {
         setError('error');
@@ -67,8 +65,8 @@ export const Pagination = ({
             className="pagination__limit"
             name="pageLimit"
             onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-              setPageLimit(+e.target.value);
-              setPageNumber(1);
+              dispatch(setLimit(+e.target.value));
+              dispatch(setPage(1));
             }}
           >
             <option value="10">10</option>
@@ -82,33 +80,33 @@ export const Pagination = ({
         <button
           type="button"
           className="pagination__button"
-          onClick={() => setPageNumber(1)}
-          disabled={pageNumber === 1}
+          onClick={() => dispatch(setPage(1))}
+          disabled={page === 1}
         >
           &laquo;
         </button>
         <button
           type="button"
           className="pagination__button"
-          onClick={() => setPageNumber(pageNumber - 1)}
-          disabled={pageNumber === 1}
+          onClick={() => dispatch(setPage(page - 1))}
+          disabled={page === 1}
         >
           &lt;
         </button>
-        <p className="pagination__number">{pageNumber}</p>
+        <p className="pagination__number">{page}</p>
         <button
           type="button"
           className="pagination__button"
-          onClick={() => setPageNumber(pageNumber + 1)}
-          disabled={pageNumber === lastPage}
+          onClick={() => dispatch(setPage(page + 1))}
+          disabled={page === lastPage}
         >
           &gt;
         </button>
         <button
           type="button"
           className="pagination__button"
-          onClick={() => setPageNumber(lastPage)}
-          disabled={pageNumber === lastPage}
+          onClick={() => dispatch(setPage(lastPage))}
+          disabled={page === lastPage}
         >
           &raquo;
         </button>

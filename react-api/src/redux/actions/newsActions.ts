@@ -1,9 +1,6 @@
 import { Dispatch } from 'react';
-import {
-  NewsAction,
-  NewsTypes,
-  requestSearchData,
-} from '../../interfaces/newsTypes';
+import { NewsAction, NewsTypes } from '../../interfaces/newsTypes';
+import { RequestSearchData } from '../../interfaces/requestValueTypes';
 import {
   API_KEY,
   BASE_URL,
@@ -23,8 +20,8 @@ export const errorNews = (error: string): NewsAction => {
   return { type: NewsTypes.ERROR_NEWS, payload: error };
 };
 
-export const getNews = (searchData: requestSearchData) => {
-  return async (dispatch: Dispatch<NewsAction>) => {
+export const getNews = (searchData: RequestSearchData) => {
+  return async (dispatch: Dispatch<NewsAction>): Promise<void> => {
     const { query, sort, page, limit } = searchData;
 
     dispatch(requestNews());

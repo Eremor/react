@@ -1,12 +1,5 @@
 import { IArticle } from './types';
 
-export interface requestSearchData {
-  query: string;
-  sort: string;
-  page: number;
-  limit: number;
-}
-
 export interface NewsState {
   articles: IArticle[];
   loading: boolean;

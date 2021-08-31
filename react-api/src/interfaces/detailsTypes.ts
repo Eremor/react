@@ -1,4 +1,4 @@
-import { IArticle } from "./types";
+import { IArticle } from './types';
 
 export interface DetailsState {
   article: IArticle | null;
@@ -6,24 +6,24 @@ export interface DetailsState {
   error: string | null;
 }
 
-export enum DetailsType {
+export enum DetailsTypes {
   REQUEST_DETAILS = 'REQUEST_DETAILS',
   RECEIVE_DETAILS = 'RECEIVE_DETAILS',
   ERROR_DETAILS = 'ERROR_DETAILS',
 }
 
 interface RequestDetails {
-  type: DetailsType.REQUEST_DETAILS;
+  type: DetailsTypes.REQUEST_DETAILS;
 }
 
 interface ReceiveDetails {
-  type: DetailsType.RECEIVE_DETAILS;
+  type: DetailsTypes.RECEIVE_DETAILS;
   payload: IArticle;
 }
 
 interface ErrorDetails {
-  type: DetailsType.ERROR_DETAILS;
+  type: DetailsTypes.ERROR_DETAILS;
   payload: string;
 }
 
-export type DetailsAction = RequestDetails | ReceiveDetails | ErrorDetails
+export type DetailsAction = RequestDetails | ReceiveDetails | ErrorDetails;
