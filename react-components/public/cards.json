@@ -1,0 +1,74 @@
+[
+  {
+    "image": "blueberry.png",
+    "title": "Blueberry",
+    "author": "John Smith",
+    "tags": ["picture", "fruits", "vector"],
+    "countLikes": 890,
+    "countWatchers": 7022
+  },
+  {
+    "image": "grape.png",
+    "title": "Grape",
+    "author": "John Smith",
+    "tags": ["picture", "fruits", "vector"],
+    "countLikes": 928,
+    "countWatchers": 6248
+  },
+  {
+    "image": "ice-tea.png",
+    "title": "Ice tea",
+    "author": "Steve Simpson",
+    "tags": ["drinks", "cocktails"],
+    "countLikes": 264,
+    "countWatchers": 1035
+  },
+  {
+    "image": "lemonade.png",
+    "title": "Lemonade",
+    "author": "Thomas Hedger",
+    "tags": ["image", "drinks", "cocktails"],
+    "countLikes": 923,
+    "countWatchers": 10272
+  },
+  {
+    "image": "lemon.png",
+    "title": "Lemon",
+    "author": "Steve Simpson",
+    "tags": ["fruits", "vector"],
+    "countLikes": 890,
+    "countWatchers": 8371
+  },
+  {
+    "image": "pinata.png",
+    "title": "Pinata",
+    "author": "John Smith",
+    "tags": ["image", "vector"],
+    "countLikes": 134,
+    "countWatchers": 5026
+  },
+  {
+    "image": "present.png",
+    "title": "Present",
+    "author": "Pasha Bumazhniy",
+    "tags": ["image", "vector", "party"],
+    "countLikes": 329,
+    "countWatchers": 9183
+  },
+  {
+    "image": "punch.png",
+    "title": "Punch",
+    "author": "Thomas Hedger",
+    "tags": ["image", "drinks", "cocktails"],
+    "countLikes": 890,
+    "countWatchers": 3921
+  },
+  {
+    "image": "surprise.png",
+    "title": "Surprise",
+    "author": "Pasha Bumazhniy",
+    "tags": ["image", "vector", "party"],
+    "countLikes": 231,
+    "countWatchers": 3591
+  }
+]

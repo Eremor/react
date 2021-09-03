@@ -1,0 +1,114 @@
+.card {
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+
+  &__image {
+    margin-bottom: 30px;
+    width: 70%;
+    height: 70%;
+    align-self: center;
+  }
+
+  &__title {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    line-height: 2.3rem;
+    color: #a31a98;
+  }
+
+  &__subtitle {
+    margin-bottom: 15px;
+    align-self: flex-end;
+    font-weight: 400;
+    font-style: 1.4rem;
+    line-height: 1.6rem;
+
+    & strong {
+      color: #a31a98;
+    }
+  }
+
+  &__tags {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__tag {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    line-height: 1.2rem;
+    text-transform: uppercase;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__info {
+    display: flex;
+  }
+
+  &__likes {
+    position: relative;
+    padding-left: 30px;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 10px;
+      display: block;
+      width: 14px;
+      height: 14px;
+      background: url("./../../assets/icons/like.svg");
+    }
+
+    &:hover {
+      &::before {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  &__watchers {
+    position: relative;
+    padding-left: 30px;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10px;
+      display: block;
+      width: 14px;
+      height: 14px;
+      background: url("./../../assets/icons/eye.svg");
+    }
+
+    &:hover {
+      &::before {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
